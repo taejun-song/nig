@@ -7,7 +7,6 @@ Bottom-up approach - start with basic AF3 functionality.
 import os
 import json
 import subprocess
-import tempfile
 from pathlib import Path
 
 
@@ -185,64 +184,3 @@ def parse_af3_results(output_dir: str, job_name: str) -> dict:
     results["overall_confidence"] = (iptm + ptm) / 2.0
     
     return results
-
-
-def main():
-    """Main test function."""
-    
-    # Example protein sequences (replace with your own)
-    target_seq = "MKQHKAMIVALIVICITAVVAALVTRKDLCEVHIRTGQTEVAVFTAYESE"  # Example target
-    binder_seq = "MAEGEITTFTALTEKFNLPPGNYKKPKLLYCSNGGHFLRILPDGTVDGT"    # Example binder
-    
-    # Configuration (adjust paths for your system)
-    input_dir = "/tmp/af3_test_input"
-    output_dir = "/tmp/af3_test_output" 
-    job_name = "test_binding_001"
-    
-    print("=== AlphaFold3 Binding Test ===")
-    print(f"Target sequence: {target_seq[:30]}...")
-    print(f"Binder sequence: {binder_seq[:30]}...")
-    print(f"Job name: {job_name}")
-    
-    try:
-        # Step 1: Create AF3 input
-        print("\n1. Creating AF3 input...")
-        af3_input = create_af3_input(target_seq, binder_seq, job_name)
-        print(f"   Created input with {len(af3_input['sequences'])} proteins")
-        
-        # Step 2: Submit job  
-        print("\n2. Submitting to SLURM...")
-        job_id = submit_af3_job(af3_input, input_dir, output_dir)
-        print(f"   Job ID: {job_id}")
-        
-        # Step 3: Monitor job (basic check)
-        print(f"\n3. Job status check...")
-        status = check_job_status(job_id)
-        print(f"   Current status: {status}")
-        
-        if status in ["completed", "failed"]:
-            # Step 4: Parse results if completed
-            print(f"\n4. Parsing results...")
-            results = parse_af3_results(output_dir, job_name)
-            
-            print(f"   Results: {json.dumps(results, indent=2)}")
-            
-            if "iptm_score" in results:
-                print(f"\n=== BINDING ASSESSMENT ===")
-                print(f"ipTM score: {results['iptm_score']:.3f}")
-                print(f"pTM score: {results['ptm_score']:.3f}") 
-                print(f"Binding quality: {results['binding_quality']}")
-                print(f"Overall confidence: {results['overall_confidence']:.3f}")
-        else:
-            print(f"   Job still {status}. Check later with:")
-            print(f"   squeue -j {job_id}")
-            
-    except Exception as e:
-        print(f"ERROR: {e}")
-        return 1
-        
-    return 0
-
-
-if __name__ == "__main__":
-    exit(main())
