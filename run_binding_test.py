@@ -64,7 +64,7 @@ def main():
         # Submit job
         print(f"🚀 Submitting to SLURM...")
         job_id = submit_af3_job(
-            AF3_CONFIG["af3_path"]
+            AF3_CONFIG["af3_path"],
             AF3_CONFIG["input_dir"],
             AF3_CONFIG["output_dir"],
             af3_input,
