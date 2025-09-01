@@ -47,7 +47,13 @@ def create_af3_input(target_sequence: str, binder_sequence: str, job_name: str =
     return fold_input
 
 
-def submit_af3_job(input_dict: dict, input_dir: str, output_dir: str, nodelist: str = None) -> str:
+def submit_af3_job(
+        af3_path: Path,
+        input_dir: Path, 
+        output_dir: Path, 
+        input_dict: dict, 
+        nodelist: str = None
+    ) -> str:
     """
     Submit AlphaFold3 job to SLURM.
     
@@ -62,8 +68,8 @@ def submit_af3_job(input_dict: dict, input_dir: str, output_dir: str, nodelist: 
     """
     
     # Create input/output directories
-    os.makedirs(input_dir, exist_ok=True)
-    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(af3_path / input_dir, exist_ok=True)
+    os.makedirs(af3_path / output_dir, exist_ok=True)
     
     # Write input file
     input_filename = f"fold_input_{input_dict['name']}.json"
@@ -77,10 +83,10 @@ def submit_af3_job(input_dict: dict, input_dir: str, output_dir: str, nodelist: 
     # Submit SLURM job
     cmd = [
         "sbatch",
-        "run_alphafold3.slurm",  # Your existing AF3 SLURM script
+        af3_path / "run_alphafold3.slurm",  # Your existing AF3 SLURM script
         input_filename,
-        input_dir,
-        output_dir
+        af3_path / input_dir,
+        af3_path / output_dir
     ]
     
     if nodelist:
