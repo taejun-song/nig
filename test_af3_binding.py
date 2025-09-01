@@ -67,26 +67,33 @@ def submit_af3_job(
         SLURM job ID
     """
     
+    # Show constructed paths
+    full_input_dir = af3_path / input_dir
+    full_output_dir = af3_path / output_dir
+    input_filename = f"fold_input_{input_dict['name']}.json"
+    input_path = full_input_dir / input_filename
+    
+    print(f"AF3 input directory: {full_input_dir}")
+    print(f"AF3 output directory: {full_output_dir}") 
+    print(f"Input file would be: {input_path}")
+    
     # Create input/output directories
-    os.makedirs(af3_path / input_dir, exist_ok=True)
-    os.makedirs(af3_path / output_dir, exist_ok=True)
+    os.makedirs(full_input_dir, exist_ok=True)
+    os.makedirs(full_output_dir, exist_ok=True)
     
     # Write input file
-    input_filename = f"fold_input_{input_dict['name']}.json"
-    input_path = Path(input_dir) / input_filename
-    
     with open(input_path, 'w') as f:
         json.dump(input_dict, f, indent=2)
     
-    print(f"Created AF3 input: {input_path}")
+    print(f"✅ Created AF3 input: {input_path}")
     
     # Submit SLURM job
     cmd = [
         "sbatch",
-        af3_path / "run_alphafold3.slurm",  # Your existing AF3 SLURM script
+        str(af3_path / "run_alphafold3.slurm"),  # Your existing AF3 SLURM script
         input_filename,
-        af3_path / input_dir,
-        af3_path / output_dir
+        str(af3_path / input_dir),
+        str(af3_path / output_dir)
     ]
     
     if nodelist:

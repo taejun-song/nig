@@ -81,13 +81,13 @@ def main():
         print(f"\n📋 Monitoring:")
         print(f"   Job status: squeue -j {job_id}")
         print(f"   Cancel job: scancel {job_id}")
-        print(f"   View logs: tail -f {AF3_CONFIG['output_dir']}/logs/{job_name}*.out")
+        print(f"   View logs: tail -f {AF3_CONFIG['af3_path'] / AF3_CONFIG['output_dir']}/logs/{job_name}*.out")
         
         print(f"\n🔍 Parse results when complete:")
         print(f"   python -c \"")
         print(f"from test_af3_binding import parse_af3_results")
         print(f"import json")
-        print(f"r = parse_af3_results('{AF3_CONFIG['output_dir']}', '{job_name}')")
+        print(f"r = parse_af3_results('{AF3_CONFIG['af3_path'] / AF3_CONFIG['output_dir']}', '{job_name}')")
         print(f"print(json.dumps(r, indent=2))\"")
         
     except FileNotFoundError as e:
