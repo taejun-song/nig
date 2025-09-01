@@ -1,0 +1,19 @@
+# Example input configuration for AF3 binding test
+# Lines starting with # are comments
+
+# Job settings
+job_name=my_binding_test
+
+# Target protein (choose one method)
+target_name=MyTargetProtein
+target_fasta=./test_data/target.fasta
+# target_sequence=MKQHKAMIVALIVICITAVVAALVTRKDLCEVHIRTGQTEVAVFTAYESE
+# target_pdb=./test_data/target.pdb
+# target_chain=A
+
+# Binder protein (choose one method)
+binder_name=MyBinderProtein  
+binder_fasta=./test_data/binder.fasta
+# binder_sequence=MAEGEITTFTALTEKFNLPPGNYKKPKLLYCSNGGHFLRILPDGTVDGT
+# binder_pdb=./test_data/binder.pdb
+# binder_chain=A
