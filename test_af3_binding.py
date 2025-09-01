@@ -30,26 +30,18 @@ def create_af3_input(target_sequence: str, binder_sequence: str, job_name: str =
             {
                 "protein": {
                     "id": "target",
-                    "sequence": target_sequence,
-                    "modifications": [],
-                    "unpairedMsa": None,
-                    "pairedMsa": None,
-                    "templates": []  # No templates - ab initio prediction
+                    "sequence": target_sequence
                 }
             },
             {
                 "protein": {
                     "id": "binder", 
-                    "sequence": binder_sequence,
-                    "modifications": [],
-                    "unpairedMsa": None,
-                    "pairedMsa": None,
-                    "templates": []  # No templates - ab initio prediction
+                    "sequence": binder_sequence
                 }
             }
         ],
         "dialect": "alphafold3",
-        "version": 1
+        "version": 2
     }
     
     return fold_input
