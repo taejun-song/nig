@@ -4,8 +4,7 @@ Handles FASTA files, PDB files, and direct sequences.
 """
 
 import os
-from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict
 
 
 def load_sequence_from_fasta(fasta_path: str) -> str:

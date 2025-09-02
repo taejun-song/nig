@@ -29,13 +29,13 @@ def create_af3_input(target_sequence: str, binder_sequence: str, job_name: str =
         "sequences": [
             {
                 "protein": {
-                    "id": "target",
+                    "id": "A",
                     "sequence": target_sequence
                 }
             },
             {
                 "protein": {
-                    "id": "binder", 
+                    "id": "B", 
                     "sequence": binder_sequence
                 }
             }
