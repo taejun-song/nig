@@ -15,7 +15,7 @@ AF3_CONFIG = {
 
 # RFdiffusion configuration
 RFDIFFUSION_CONFIG = {
-    "rfdiffusion_path": Path("/extdata3/OHC/protein_design/RFdiffusion/"),
+    "rfdiffusion_path": Path("/extdata1/TJ/workspace/RFdiffusion/"),
     "conda_env": "SE3nv",
     "output_dir": Path("./rfdiffusion_output"),
     "slurm_config": {
