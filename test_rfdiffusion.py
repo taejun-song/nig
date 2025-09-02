@@ -77,6 +77,8 @@ def create_rfdiffusion_slurm_script(
     
     # Create SLURM script content
     nodelist_line = f"#SBATCH --nodelist={slurm_config['nodelist']}\n" if 'nodelist' in slurm_config else ""
+    mem_line = f"#SBATCH --mem={slurm_config['mem']}\n" if 'mem' in slurm_config else ""
+    time_line = f"#SBATCH --time={slurm_config['time']}\n" if 'time' in slurm_config else ""
     
     script_content = f"""#!/bin/bash
 #SBATCH --job-name={job_name}
@@ -84,9 +86,7 @@ def create_rfdiffusion_slurm_script(
 {nodelist_line}#SBATCH --nodes={slurm_config['nodes']}
 #SBATCH --ntasks={slurm_config['ntasks']}
 #SBATCH --cpus-per-task={slurm_config['cpus-per-task']}
-#SBATCH --mem={slurm_config['mem']}
-#SBATCH --time={slurm_config['time']}
-#SBATCH --gres={slurm_config['gres']}
+{mem_line}{time_line}#SBATCH --gres={slurm_config['gres']}
 #SBATCH --output={log_dir}/{job_name}.out
 #SBATCH --error={log_dir}/{job_name}.err
 

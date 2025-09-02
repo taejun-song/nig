@@ -24,8 +24,6 @@ RFDIFFUSION_CONFIG = {
         "nodes": 1,
         "ntasks": 1,
         "cpus-per-task": 8,
-        "mem": "16G",
-        "time": "02:00:00",
-        "gres": "gpu:1"
+        "gres": "gpu"
     }
 }
