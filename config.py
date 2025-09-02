@@ -19,7 +19,7 @@ RFDIFFUSION_CONFIG = {
     "conda_env": "SE3nv",
     "output_dir": Path("./rfdiffusion_output"),
     "slurm_config": {
-        "partition": "gpu", 
+        "partition": "3090", 
         "nodes": 1,
         "ntasks": 1,
         "cpus-per-task": 8,

@@ -3,7 +3,6 @@
 Integrated workflow: Generate protein binders with RFdiffusion and evaluate with AF3.
 """
 
-import sys
 import argparse
 from pathlib import Path
 

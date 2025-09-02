@@ -4,9 +4,7 @@ RFdiffusion test script for protein binder generation.
 Bottom-up approach - basic RFdiffusion functionality.
 """
 
-import os
 import subprocess
-import tempfile
 from pathlib import Path
 
 
