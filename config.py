@@ -20,10 +20,11 @@ RFDIFFUSION_CONFIG = {
     "output_dir": Path("./rfdiffusion_output"),
     "slurm_config": {
         "partition": "3090", 
+        "nodelist": "node03",
         "nodes": 1,
         "ntasks": 1,
         "cpus-per-task": 8,
-        "mem": "32G",
+        "mem": "16G",
         "time": "02:00:00",
         "gres": "gpu:1"
     }

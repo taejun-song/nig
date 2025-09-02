@@ -76,10 +76,12 @@ def create_rfdiffusion_slurm_script(
     log_dir.mkdir(exist_ok=True)
     
     # Create SLURM script content
+    nodelist_line = f"#SBATCH --nodelist={slurm_config['nodelist']}\n" if 'nodelist' in slurm_config else ""
+    
     script_content = f"""#!/bin/bash
 #SBATCH --job-name={job_name}
 #SBATCH --partition={slurm_config['partition']}
-#SBATCH --nodes={slurm_config['nodes']}
+{nodelist_line}#SBATCH --nodes={slurm_config['nodes']}
 #SBATCH --ntasks={slurm_config['ntasks']}
 #SBATCH --cpus-per-task={slurm_config['cpus-per-task']}
 #SBATCH --mem={slurm_config['mem']}
